@@ -11,15 +11,6 @@ export type GetByIdParams = {
 
 export type GetByIdParamsRequired = Omit<GetByIdParams, keyof CommonParams>
 
-export type GetByTitleParams = {
-  t: string // 	Movie title to search for.
-} & CommonParams
-
-export type GetByTitleParamsRequired = Omit<
-  GetByTitleParams,
-  keyof CommonParams
->
-
 export type GetBySearchParams = {
   s: string // 	Movie title to search for.
   page?: string // Page number to return.

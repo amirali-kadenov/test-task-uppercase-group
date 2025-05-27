@@ -3,8 +3,6 @@ import type {
   GetByIdParamsRequired,
   GetBySearchParams,
   GetBySearchParamsRequired,
-  GetByTitleParams,
-  GetByTitleParamsRequired,
 } from "./types"
 
 export const getBySearchMovieParams = (
@@ -24,16 +22,6 @@ export const getByIdMovieParams = ({
   return {
     i,
     plot: "full",
-    r: "json",
-  }
-}
-
-export const getByTitleMovieParams = ({
-  t,
-}: GetByTitleParamsRequired): GetByTitleParams => {
-  return {
-    t,
-    plot: "short",
     r: "json",
   }
 }

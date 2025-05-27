@@ -1,8 +1,12 @@
 import type { Metadata } from "next"
 import { moviesApi } from "@/entities/movies"
 
+type Params = {
+  id: string
+}
+
 type Args = {
-  params: Promise<{ id: string }>
+  params: Promise<Params>
 }
 
 export const generateMetadata = async ({ params }: Args): Promise<Metadata> => {

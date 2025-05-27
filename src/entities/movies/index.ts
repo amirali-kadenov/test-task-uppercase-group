@@ -4,11 +4,9 @@ export { moviesQueries } from "./model/queries"
 export { useMoviesStore } from "./model/store"
 export { useMovie } from "./model/queries/use-movie"
 export {
-  TOP_20_MOVIES,
   MOVIES_PER_PAGE,
   MOVIES_PARAM_NAMES,
-  MOVIES_QUERY_KEY,
-  MOVIES_MAX_PAGE,
+  TOP_20_MOVIES_IDS,
 } from "./model/constants"
 
 export { MOVIES_GRID, NOT_AVAILABLE } from "./lib/constants"

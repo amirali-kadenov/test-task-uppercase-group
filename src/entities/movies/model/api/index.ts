@@ -1,22 +1,17 @@
 import { api } from "./api"
-import {
-  getByIdMovieParams,
-  getBySearchMovieParams,
-  getByTitleMovieParams,
-} from "./params"
+import { getByIdMovieParams, getBySearchMovieParams } from "./params"
 import type {
   GetByIdParamsRequired,
   GetBySearchParamsRequired,
-  GetByTitleParamsRequired,
   MovieDetails,
   MoviesResponse,
 } from "./types"
-import { TOP_20_MOVIES } from "../constants"
+import { TOP_20_MOVIES_IDS } from "../constants"
 
 export const moviesApi = {
   async getTopMovies(): Promise<MoviesResponse> {
     const movies = await Promise.all(
-      TOP_20_MOVIES.map((t) => moviesApi.getByTitle({ t })),
+      TOP_20_MOVIES_IDS.map((i) => moviesApi.getById({ i })),
     )
 
     return {
@@ -33,11 +28,6 @@ export const moviesApi = {
   getById(params: GetByIdParamsRequired) {
     return api.get<MovieDetails>("/", {
       params: getByIdMovieParams(params),
-    })
-  },
-  getByTitle(params: GetByTitleParamsRequired) {
-    return api.get<MovieDetails>("/", {
-      params: getByTitleMovieParams(params),
     })
   },
 }
