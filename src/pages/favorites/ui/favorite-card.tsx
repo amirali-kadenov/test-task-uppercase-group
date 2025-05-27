@@ -1,11 +1,11 @@
-import { MovieCard, MovieCardSkeleton, useMovieQuery } from "@/entities/movies"
+import { MovieCard, MovieCardSkeleton, useMovie } from "@/entities/movies"
 
 type Props = {
   movieId: string
 }
 
 export const FavoriteCard = ({ movieId }: Props) => {
-  const query = useMovieQuery(movieId)
+  const query = useMovie(movieId)
 
   if (query.isLoading) {
     return <MovieCardSkeleton />

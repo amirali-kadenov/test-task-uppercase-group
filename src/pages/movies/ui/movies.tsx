@@ -5,12 +5,9 @@ import { useSearchParams } from "next/navigation"
 import InfiniteScroll from "react-infinite-scroll-component"
 import {
   MovieCard,
-  getMoviesBySearch,
-  MOVIES_QUERY_KEY,
-  MOVIES_MAX_PAGE,
-  getMoviesParams,
   MOVIES_GRID,
   MOVIES_PARAM_NAMES,
+  moviesQueries,
 } from "@/entities/movies"
 import { cn } from "@/shared/lib/utils/cn"
 import { MoviesEmpty } from "./movies-empty"
@@ -23,22 +20,11 @@ import { isEmpty } from "../lib"
 export const Movies = () => {
   const searchParams = useSearchParams()
 
-  const search = searchParams?.get(MOVIES_PARAM_NAMES.SEARCH)
+  const s = searchParams?.get(MOVIES_PARAM_NAMES.SEARCH)
   const page = searchParams?.get(MOVIES_PARAM_NAMES.PAGE)
-  const params = getMoviesParams({ s: search, page })
 
   const { data, fetchNextPage, hasNextPage, error, isLoading } =
-    useInfiniteQuery({
-      queryKey: [MOVIES_QUERY_KEY, params],
-      initialPageParam: params.page,
-      maxPages: MOVIES_MAX_PAGE,
-      queryFn: ({ pageParam }) =>
-        getMoviesBySearch({ ...params, page: pageParam }),
-      getNextPageParam: (lastPage, _, pageParam) => {
-        if (!lastPage?.Search?.length) return
-        return pageParam + 1
-      },
-    })
+    useInfiniteQuery(moviesQueries.infiniteMovies({ s, page }))
 
   if (isLoading) {
     return <MoviesLoading className="mt-14" />
@@ -52,13 +38,13 @@ export const Movies = () => {
     return <MoviesEmpty />
   }
 
-  const decodedSearch = search ? decodeURIComponent(search) : null
+  const search = s ? decodeURIComponent(s) : null
 
   return (
     <section className="mt-10">
-      {decodedSearch && (
+      {search && (
         <MoviesSearchResults
-          search={decodedSearch}
+          search={search}
           totalResults={data?.pages[0]?.totalResults}
         />
       )}
