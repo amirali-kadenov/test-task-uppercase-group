@@ -22,9 +22,9 @@ import { isEmpty } from "../lib"
 export const Movies = () => {
   const searchParams = useSearchParams()
 
-  const s = searchParams?.get("s")
-  const page = searchParams?.get("page")
-  const params = getMoviesParams({ s, page })
+  const search = searchParams?.get(MOVIES_PARAM_NAMES.SEARCH)
+  const page = searchParams?.get(MOVIES_PARAM_NAMES.PAGE)
+  const params = getMoviesParams({ s: search, page })
 
   const { data, fetchNextPage, hasNextPage, error, isLoading } =
     useInfiniteQuery({
@@ -51,11 +51,13 @@ export const Movies = () => {
     return <MoviesEmpty />
   }
 
+  const decodedSearch = search ? decodeURIComponent(search) : null
+
   return (
     <section className="mt-10">
-      {s && (
+      {decodedSearch && (
         <MoviesSearchResults
-          search={s}
+          search={decodedSearch}
           totalResults={data?.pages[0]?.totalResults}
         />
       )}

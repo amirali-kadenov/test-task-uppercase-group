@@ -15,15 +15,17 @@ export const MoviesSearch = () => {
   const searchParams = useSearchParams()
   const pathname = usePathname()
 
-  const initialSearch = searchParams?.get(MOVIES_PARAM_NAMES.SEARCH)
-  const [value, setValue] = useState(initialSearch ?? "")
+  const search = searchParams?.get(MOVIES_PARAM_NAMES.SEARCH)
+  const initialValue = search ? decodeURIComponent(search) : ""
+  const [value, setValue] = useState(initialValue)
 
   const setSearch = (search: string | null) => {
     if (!searchParams) return
 
     const params = new URLSearchParams(searchParams)
 
-    if (search) params.set(MOVIES_PARAM_NAMES.SEARCH, search)
+    if (search)
+      params.set(MOVIES_PARAM_NAMES.SEARCH, encodeURIComponent(search))
     else params.delete(MOVIES_PARAM_NAMES.SEARCH)
 
     const newUrl = `${pathname}?${params.toString()}`

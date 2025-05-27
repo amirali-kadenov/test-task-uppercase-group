@@ -8,7 +8,7 @@ type Params = {
 
 export const getMoviesParams = (params?: Params): GetBySearchParams => {
   return {
-    s: params?.s ?? DEFAULT_SEARCH,
+    s: params?.s ? decodeURIComponent(params.s) : DEFAULT_SEARCH,
     page: Number(params?.page) || DEFAULT_PAGE,
     plot: "short",
     r: "json",
