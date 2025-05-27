@@ -1,6 +1,7 @@
 import type {
   AxiosInstance,
   AxiosRequestConfig,
+  AxiosResponse,
   InternalAxiosRequestConfig,
 } from "axios"
 import axios from "axios"
@@ -23,6 +24,12 @@ export class Api {
     ) => InternalAxiosRequestConfig,
   ) {
     this._instance.interceptors.request.use(interceptor)
+  }
+
+  public addResponseInterceptor(
+    interceptor: (value: AxiosResponse) => AxiosResponse,
+  ) {
+    this._instance.interceptors.response.use(interceptor)
   }
 
   public async get<T>(
