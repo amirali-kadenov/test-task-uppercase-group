@@ -5,6 +5,7 @@ export const createQueryClient = () => {
     defaultOptions: {
       queries: {
         staleTime: 60 * 1000,
+        gcTime: 60 * 1000,
       },
     },
   })
