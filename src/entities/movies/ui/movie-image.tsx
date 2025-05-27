@@ -1,6 +1,5 @@
 "use client"
 
-import clsx from "clsx"
 import Image from "next/image"
 import { useState } from "react"
 import placeholder from "@/shared/assets/placeholder.svg"
@@ -10,10 +9,9 @@ type Props = {
   movie: Movie
   width: number
   height: number
-  className?: string
 }
 
-export const MovieImage = ({ movie, width, height, className }: Props) => {
+export const MovieImage = ({ movie, width, height }: Props) => {
   const [imgSrc, setImgSrc] = useState(movie.Poster)
 
   const handleError = () => {
@@ -27,10 +25,7 @@ export const MovieImage = ({ movie, width, height, className }: Props) => {
       <Image
         src={imgSrc}
         alt={`${movie.Title} poster`}
-        className={clsx(
-          "object-cover",
-          imgSrc === placeholder ? "w-full h-full" : className,
-        )}
+        className="object-cover absolute h-full w-auto left-1/2 -translate-x-1/2"
         width={width}
         height={height}
         onError={handleError}

@@ -35,13 +35,8 @@ export const MovieDetailsView = ({ movie }: Props) => {
         {/* Movie Poster */}
         <div className="lg:col-span-1">
           <Card className="overflow-hidden p-0">
-            <CardContent className="p-0">
-              <MovieImage
-                movie={movie}
-                width={400}
-                height={600}
-                className="w-full h-auto"
-              />
+            <CardContent className="p-0 relative">
+              <MovieImage movie={movie} width={400} height={600} />
             </CardContent>
           </Card>
         </div>

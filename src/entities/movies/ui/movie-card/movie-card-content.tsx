@@ -12,12 +12,7 @@ export const MovieCardContent = ({ movie, className }: Props) => {
   return (
     <div className={cn("flex flex-col justify-between h-full pb-4", className)}>
       <div className="relative aspect-[2/3] bg-muted">
-        <MovieImage
-          width={200}
-          height={300}
-          movie={movie}
-          className="absolute h-full w-auto left-1/2 -translate-x-1/2"
-        />
+        <MovieImage width={200} height={300} movie={movie} />
       </div>
       <CardContent className="mt-2 grow flex flex-col justify-between">
         <h3 className="font-semibold text-lg leading-tight line-clamp-2">
