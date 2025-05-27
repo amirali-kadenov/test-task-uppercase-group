@@ -1,5 +1,6 @@
 import type { ReactNode } from "react"
 import { Spinner } from "@/shared/ui/spinner"
+import { NOT_AVAILABLE } from "../../lib/constants"
 import { useMovieQuery } from "../../model/queries/use-movie-query"
 import { MovieFavoriteButton } from "../movie-favorite-button"
 
@@ -25,7 +26,11 @@ export const MovieCardHoverContent = ({ movieId }: Props) => {
   return (
     <Container>
       <div className="line-clamp-[9] text-white">{query.data.Plot}</div>
-      <p className="font-bold mt-3 text-white">{query.data.imdbRating}/10</p>
+
+      {query.data.imdbRating !== NOT_AVAILABLE && (
+        <p className="font-bold mt-3 text-white">{query.data.imdbRating}/10</p>
+      )}
+
       <MovieFavoriteButton
         className="absolute bottom-4 left-1/2 -translate-x-1/2"
         movieId={query.data.imdbID}
