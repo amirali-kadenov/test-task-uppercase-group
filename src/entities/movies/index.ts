@@ -13,6 +13,7 @@ export {
   MOVIES_QUERY_KEY,
   MOVIES_MAX_PAGE,
   MOVIES_GRID,
+  NOT_AVAILABLE,
 } from "./lib/constants"
 
 export { MovieCard } from "./ui/movie-card/movie-card"

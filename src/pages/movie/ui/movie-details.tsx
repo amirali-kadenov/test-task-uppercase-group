@@ -12,6 +12,7 @@ import {
 import {
   MovieFavoriteButton,
   MovieImage,
+  NOT_AVAILABLE,
   type MovieDetails,
 } from "@/entities/movies"
 import { Badge } from "@/shared/ui/badge"
@@ -103,7 +104,7 @@ export const MovieDetailsView = ({ movie }: Props) => {
                     </div>
                   </div>
                 ))}
-                {movie.Metascore !== "N/A" && (
+                {movie.Metascore !== NOT_AVAILABLE && (
                   <div className="text-center">
                     <div className="font-semibold text-lg">
                       {movie.Metascore}/100
@@ -218,7 +219,7 @@ export const MovieDetailsView = ({ movie }: Props) => {
                 </div>
               </div>
 
-              {movie.Awards !== "N/A" && (
+              {movie.Awards !== NOT_AVAILABLE && (
                 <>
                   <Separator />
                   <div>
@@ -231,7 +232,7 @@ export const MovieDetailsView = ({ movie }: Props) => {
                 </>
               )}
 
-              {movie.Website !== "N/A" && (
+              {movie.Website !== NOT_AVAILABLE && (
                 <>
                   <Separator />
                   <div>
