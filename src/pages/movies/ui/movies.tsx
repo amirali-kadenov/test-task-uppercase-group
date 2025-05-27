@@ -9,7 +9,6 @@ import {
   MOVIES_PARAM_NAMES,
   moviesQueries,
 } from "@/entities/movies"
-import { cn } from "@/shared/lib/utils/cn"
 import { MoviesEmpty } from "./movies-empty"
 import { MoviesError } from "./movies-error"
 import { MoviesLoading } from "./movies-loading"
@@ -27,7 +26,7 @@ export const Movies = () => {
     useInfiniteQuery(moviesQueries.infiniteMovies({ s, page }))
 
   if (isLoading) {
-    return <MoviesLoading className="mt-14" />
+    return <MoviesLoading className="mt-10" />
   }
 
   if (error) {
@@ -41,11 +40,12 @@ export const Movies = () => {
   const search = s ? decodeURIComponent(s) : null
 
   return (
-    <section className="mt-10">
+    <section className="mt-10 mb-6">
       {search && (
         <MoviesSearchResults
           search={search}
           totalResults={data?.pages[0]?.totalResults}
+          className="mb-6"
         />
       )}
 
@@ -54,7 +54,7 @@ export const Movies = () => {
         next={fetchNextPage}
         hasMore={hasNextPage}
         loader={<MoviesSkeleton />}
-        className={cn(MOVIES_GRID, "my-6")}
+        className={MOVIES_GRID}
       >
         {data?.pages.map((page) =>
           page?.Search?.map((movie) => (
