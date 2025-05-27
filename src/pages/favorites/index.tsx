@@ -11,7 +11,7 @@ export const FavoritesPage = () => {
     <section className="mt-10">
       <h1 className="text-2xl font-bold">Favorites</h1>
 
-      <div className={cn(MOVIES_GRID, "mt-6")}>
+      <div className={cn(MOVIES_GRID, "my-6")}>
         {favorites.map((movieId) => (
           <FavoriteCard key={movieId} movieId={movieId} />
         ))}
