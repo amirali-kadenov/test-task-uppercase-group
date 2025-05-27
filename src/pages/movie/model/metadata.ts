@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { getMovieParams, moviesApi } from "@/entities/movies"
+import { moviesApi } from "@/entities/movies"
 
 type Args = {
   params: Promise<{ id: string }>
@@ -7,7 +7,7 @@ type Args = {
 
 export const generateMetadata = async ({ params }: Args): Promise<Metadata> => {
   const { id } = await params
-  const movie = await moviesApi.getById(getMovieParams(id))
+  const movie = await moviesApi.getById({ i: id })
 
   if (!movie) {
     return {

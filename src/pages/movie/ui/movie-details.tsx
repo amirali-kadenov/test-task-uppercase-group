@@ -9,29 +9,41 @@ import {
   DollarSign,
   Users,
 } from "lucide-react"
+import { notFound } from "next/navigation"
 import {
   MovieFavoriteButton,
   MovieImage,
   NOT_AVAILABLE,
-  type MovieDetails,
+  useMovie,
 } from "@/entities/movies"
 import { Badge } from "@/shared/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card"
 import { Separator } from "@/shared/ui/separator"
+import { MovieDetailsSkeleton } from "./movie-details-skeleton"
 import { splitByComma } from "../lib"
 
 type Props = {
-  movie: MovieDetails
+  movieId: string
 }
 
-export const MovieDetailsView = ({ movie }: Props) => {
+export const MovieDetailsView = ({ movieId }: Props) => {
+  const { data: movie, isLoading, error } = useMovie(movieId)
+
+  if (isLoading) {
+    return <MovieDetailsSkeleton />
+  }
+
+  if (error || !movie) {
+    return notFound()
+  }
+
   const genres = splitByComma(movie.Genre)
   const actors = splitByComma(movie.Actors)
   const languages = splitByComma(movie.Language)
   const countries = splitByComma(movie.Country)
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-6xl">
+    <div className="container px-4 py-8 max-w-6xl">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Movie Poster */}
         <div className="lg:col-span-1">

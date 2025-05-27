@@ -1,30 +1,30 @@
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query"
-
-import { notFound } from "next/navigation"
-import { getMovieParams, MOVIES_QUERY_KEY, moviesApi } from "@/entities/movies"
+import { moviesQueries, TOP_20_MOVIES } from "@/entities/movies"
 import { createQueryClient } from "@/shared/lib/create-query-client"
 import { MovieDetailsView } from "./ui/movie-details"
+export { generateMetadata } from "./model/metadata"
 
 type Props = {
   params: Promise<{ id: string }>
 }
 
+export const revalidate = 3600 // 1 hour
+export const dynamicParams = true // isr
+export const generateStaticParams = () => {
+  return TOP_20_MOVIES.map((movie) => ({
+    id: movie,
+  }))
+}
+
 export const MoviePage = async ({ params }: Props) => {
   const { id } = await params
-  const movie = await moviesApi.getById(getMovieParams(id))
-
-  if (!movie) {
-    return notFound()
-  }
 
   const queryClient = createQueryClient()
-  await queryClient.setQueryData([MOVIES_QUERY_KEY, id], movie)
+  await queryClient.prefetchQuery(moviesQueries.movie({ i: id }))
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <MovieDetailsView movie={movie} />
+      <MovieDetailsView movieId={id} />
     </HydrationBoundary>
   )
 }
-
-export { generateMetadata } from "./model/metadata"
