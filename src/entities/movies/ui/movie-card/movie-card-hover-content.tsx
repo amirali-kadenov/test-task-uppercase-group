@@ -1,7 +1,7 @@
 import type { ReactNode } from "react"
 import { Spinner } from "@/shared/ui/spinner"
 import { NOT_AVAILABLE } from "../../lib/constants"
-import { useMovieQuery } from "../../model/queries/use-movie-query"
+import { useMovie } from "../../model/queries/use-movie"
 import { MovieFavoriteButton } from "../movie-favorite-button"
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 }
 
 export const MovieCardHoverContent = ({ movieId }: Props) => {
-  const query = useMovieQuery(movieId)
+  const query = useMovie(movieId)
 
   if (query.isLoading) {
     return (

@@ -7,7 +7,7 @@ import { cn } from "@/shared/lib/utils/cn"
 import { Card } from "@/shared/ui/card"
 import { MovieCardContent } from "./movie-card-content"
 import { MovieCardHoverContent } from "./movie-card-hover-content"
-import { type Movie } from "../../model/types"
+import { type Movie } from "../../model/api/types"
 
 type MovieCardProps = {
   movie: Movie

@@ -1,4 +1,4 @@
-type CommonParams = {
+export type CommonParams = {
   y?: string // 	Year of release.
   plot?: "short" | "full" // 	Plot summary length. (short | full)
   r?: "json" | "xml" // 	Response format. (json | xml)
@@ -9,10 +9,26 @@ export type GetByIdParams = {
   i: string // 	A valid IMDb ID (e.g. tt1285016)
 } & CommonParams
 
+export type GetByIdParamsRequired = Omit<GetByIdParams, keyof CommonParams>
+
+export type GetByTitleParams = {
+  t: string // 	Movie title to search for.
+} & CommonParams
+
+export type GetByTitleParamsRequired = Omit<
+  GetByTitleParams,
+  keyof CommonParams
+>
+
 export type GetBySearchParams = {
   s: string // 	Movie title to search for.
-  page: number // Page number to return.
+  page?: string // Page number to return.
 } & CommonParams
+
+export type GetBySearchParamsRequired = Omit<
+  GetBySearchParams,
+  keyof CommonParams
+>
 
 export type Movie = {
   Title: string // Movie title

@@ -2,9 +2,8 @@
 
 import Image from "next/image"
 import { useState } from "react"
-import placeholder from "@/shared/assets/placeholder.svg"
 import { NOT_AVAILABLE } from "../lib/constants"
-import type { Movie } from "../model/types"
+import type { Movie } from "../model/api/types"
 
 type Props = {
   movie: Movie
@@ -12,15 +11,16 @@ type Props = {
   height: number
 }
 
+const FALLBACK_SRC = "/placeholder.svg"
+
 export const MovieImage = ({ movie, width, height }: Props) => {
   const moviePoster =
-    movie.Poster === NOT_AVAILABLE ? placeholder : movie.Poster
+    movie.Poster === NOT_AVAILABLE ? FALLBACK_SRC : movie.Poster
+
   const [imgSrc, setImgSrc] = useState(moviePoster)
 
   const handleError = () => {
-    if (imgSrc !== placeholder) {
-      setImgSrc(placeholder)
-    }
+    setImgSrc(FALLBACK_SRC)
   }
 
   return (

@@ -1,6 +1,6 @@
 import { cn } from "@/shared/lib/utils/cn"
 import { CardContent } from "@/shared/ui/card"
-import type { Movie } from "../../model/types"
+import type { Movie } from "../../model/api/types"
 import { MovieImage } from "../movie-image"
 
 type Props = {
