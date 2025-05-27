@@ -3,6 +3,7 @@ export type { Movie, MovieDetails } from "./model/types"
 export { getMoviesBySearch } from "./model/actions"
 export { getMovieById } from "./model/actions"
 export { useMoviesStore } from "./model/store"
+export { useMovieQuery } from "./model/queries/use-movie-query"
 
 export { getMovieParams } from "./lib/get-movie-params"
 export { getMoviesParams } from "./lib/get-movies-params"
