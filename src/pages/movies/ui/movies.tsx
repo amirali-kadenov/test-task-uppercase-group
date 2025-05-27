@@ -10,6 +10,7 @@ import {
   MOVIES_MAX_PAGE,
   getMoviesParams,
   MOVIES_GRID,
+  MOVIES_PARAM_NAMES,
 } from "@/entities/movies"
 import { cn } from "@/shared/lib/utils/cn"
 import { MoviesEmpty } from "./movies-empty"
@@ -40,7 +41,7 @@ export const Movies = () => {
     })
 
   if (isLoading) {
-    return <MoviesLoading />
+    return <MoviesLoading className="mt-14" />
   }
 
   if (error) {
@@ -67,7 +68,7 @@ export const Movies = () => {
         next={fetchNextPage}
         hasMore={hasNextPage}
         loader={<MoviesSkeleton />}
-        className={cn(MOVIES_GRID, "mb-6")}
+        className={cn(MOVIES_GRID, "my-6")}
       >
         {data?.pages.map((page) =>
           page?.Search?.map((movie) => (
