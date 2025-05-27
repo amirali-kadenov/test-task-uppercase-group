@@ -3,6 +3,7 @@
 import Image from "next/image"
 import { useState } from "react"
 import placeholder from "@/shared/assets/placeholder.svg"
+import { NOT_AVAILABLE } from "../lib/constants"
 import type { Movie } from "../model/types"
 
 type Props = {
@@ -12,7 +13,9 @@ type Props = {
 }
 
 export const MovieImage = ({ movie, width, height }: Props) => {
-  const [imgSrc, setImgSrc] = useState(movie.Poster)
+  const moviePoster =
+    movie.Poster === NOT_AVAILABLE ? placeholder : movie.Poster
+  const [imgSrc, setImgSrc] = useState(moviePoster)
 
   const handleError = () => {
     if (imgSrc !== placeholder) {
